@@ -22,19 +22,10 @@
 	<inceptionYear>2015</inceptionYear>
 
 	<scm>
-		<connection>scm:git:git://github.com/frmichetti/master.git</connection>
-		<developerConnection>scm:git:ssh://github.com/frmichetti/master.git</developerConnection>
-		<url>https://github.com/frmichetti/master</url>
+		<url>https://github.com/frmichetti/master.git</url>
+		<developerConnection>frmichetti</developerConnection>
+		<tag>java android developer</tag>
 	</scm>
-
-	<developers>
-		<developer>
-			<name>Felipe Rodrigues Michetti</name>
-			<email>frmichetti@gmail.com</email>
-			<organization>Codecode</organization>
-			<organizationUrl>http://www.codecode.com.br</organizationUrl>
-		</developer>
-	</developers>
 
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
