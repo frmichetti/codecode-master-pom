@@ -22,10 +22,19 @@
 	<inceptionYear>2015</inceptionYear>
 
 	<scm>
-		<url>https://github.com/frmichetti/master.git</url>
-		<developerConnection>frmichetti</developerConnection>
-		<tag>java android developer</tag>
+		<connection>scm:git:git://github.com/frmichetti/master.git</connection>
+		<developerConnection>scm:git:ssh://github.com/frmichetti/master.git</developerConnection>
+		<url>https://github.com/frmichetti/master</url>
 	</scm>
+
+	<developers>
+		<developer>
+			<name>Felipe Rodrigues Michetti</name>
+			<email>frmichetti@gmail.com</email>
+			<organization>Codecode</organization>
+			<organizationUrl>http://www.codecode.com.br</organizationUrl>
+		</developer>
+	</developers>
 
 	<parent>
 		<groupId>org.sonatype.oss</groupId>
@@ -35,45 +44,55 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<ee-api-v>7.0</ee-api-v>
-		<junit-v>4.12</junit-v>
 	</properties>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>javax</groupId>
-				<artifactId>javaee-api</artifactId>
-				<version>${ee-api-v}</version>
-			</dependency>
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>${junit-v}</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
-	<build>
-
-
-		<finalName>workix</finalName>
+	<build>		
 
 		<plugins>
+		
+		<plugin>
+		   <groupId>org.apache.maven.plugins</groupId>
+		   <artifactId>maven-deploy-plugin</artifactId>
+		   <version>2.8.2</version>
+		   <configuration>
+		      <skip>true</skip>
+		   </configuration>
+		</plugin>
+		
+		<plugin>
+	      <groupId>org.sonatype.plugins</groupId>
+	      <artifactId>nexus-staging-maven-plugin</artifactId>
+	      <version>1.6.7</version>	     
+	      <extensions>true</extensions>
+	      <configuration>
+	        <serverId>ossrh</serverId>
+	        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+	        <autoReleaseAfterClose>true</autoReleaseAfterClose>
+	      </configuration>
+    	</plugin>
+    	
+    	  <plugin>
+		    <groupId>org.apache.maven.plugins</groupId>
+		    <artifactId>maven-release-plugin</artifactId>
+		    <version>2.5.3</version>
+		    <configuration>
+		    <mavenExecutorId>forked-path</mavenExecutorId>
+		    <useReleaseProfile>false</useReleaseProfile>
+		    <arguments>-Psonatype-oss-release</arguments>
+		    </configuration>
+		   </plugin>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 
-			<!-- <plugin> <artifactId>maven-assembly-plugin</artifactId> <version>2.3</version> 
-				<configuration> <descriptorRefs> <descriptorRef>jar-with-dependencies</descriptorRef> 
-				</descriptorRefs> </configuration> <executions> <execution> <phase>package</phase> 
-				<goals> <goal>single</goal> </goals> </execution> </executions> </plugin> -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -87,6 +106,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -108,6 +128,7 @@
 					</execution>
 				</executions>
 			</plugin>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
@@ -130,18 +151,16 @@
 
 	</build>
 	<description>Master Parent Pom</description>
+	<url>https://github.com/frmichetti/master.git</url>
 </project>
 
-<distributionManagement>
-	<!-- Repository for snapshots -->
-	<repository>
-		<id>sonatype-nexus-snapshots</id>
-		<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-	</repository>
-	<!-- Repository for releases -->
-	<repository>
-		<id>nexus-releases</id>
-		<name>Nexus Release Repository</name>
-		<url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-	</repository>
-</distributionManagement>
+	<distributionManagement>
+	  <snapshotRepository>
+	    <id>ossrh</id>
+	    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+	  </snapshotRepository>
+	  <repository>
+	    <id>ossrh</id>
+	    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+	  </repository>
+	</distributionManagement>
