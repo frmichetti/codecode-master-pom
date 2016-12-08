@@ -24,7 +24,7 @@
 	<scm>
 		<connection>scm:git:git://github.com/frmichetti/master.git</connection>
 		<developerConnection>scm:git:ssh://github.com/frmichetti/master.git</developerConnection>
-		<url>https://github.com/frmichetti/master</url>
+		<url>https://github.com/frmichetti/master.git</url>
 	</scm>
 
 	<developers>
